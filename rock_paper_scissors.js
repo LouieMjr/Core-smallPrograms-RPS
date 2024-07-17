@@ -14,6 +14,7 @@ const playerChoice = function (array) {
   while (!array.includes(choice)) {
     prompt(`Thats not a valid choice. Pick between ${array.join(', ')}`);
     choice = ask();
+    choice = choice[0].toUpperCase() + choice.slice(1);
   }
   return choice;
 };
@@ -34,13 +35,10 @@ const determineWinner = function (playerFunc, computerFunc) {
     (playerPick === 'Paper' && computerPick === 'Rock') ||
     (playerPick === 'Scissors' && computerPick === 'Paper')) {
     return prompt(`${playerPick} beats ${computerPick}! You win!`);
-  } else if (
-    (playerPick === 'Rock' && computerPick === 'Paper') ||
-    (playerPick === 'Paper' && computerPick === 'Scissors') ||
-    (playerPick === 'Scissors' && computerPick === 'Rock')) {
-    return prompt(`${computerPick} beats ${playerPick}! Computer wins!`);
-  } else {
+  } else if (playerPick === computerPick) {
     return prompt('Its a tie');
+  } else {
+    return prompt(`${computerPick} beats ${playerPick}! Computer wins!`);
   }
 };
 
