@@ -25,6 +25,7 @@ const computerChoice = function (array) {
   return computerPick;
 };
 
+
 const determineWinner = function (playerFunc, computerFunc) {
   const playerPick = playerFunc(OPTIONS);
   const computerPick = computerFunc(OPTIONS);
@@ -34,14 +35,31 @@ const determineWinner = function (playerFunc, computerFunc) {
     (playerPick === 'Rock' && computerPick === 'Scissors') ||
     (playerPick === 'Paper' && computerPick === 'Rock') ||
     (playerPick === 'Scissors' && computerPick === 'Paper')) {
-    return prompt(`${playerPick} beats ${computerPick}! You win!`);
+    prompt(`${playerPick} beats ${computerPick}! You win!`);
   } else if (playerPick === computerPick) {
-    return prompt('Its a tie');
+    prompt('Its a tie');
   } else {
-    return prompt(`${computerPick} beats ${playerPick}! Computer wins!`);
+    prompt(`${computerPick} beats ${playerPick}! Computer wins!`);
   }
+  return restartGame();
 };
 
-determineWinner(playerChoice, computerChoice);
+const startGame = function () {
+  console.clear();
+  prompt('Welcome to Rock, Paper, Scissor Shoot!!');
+  determineWinner(playerChoice, computerChoice);
+};
 
+const restartGame = function () {
+  prompt('Do you want to play again? Enter: yes, y, or no, n');
+  let response = ask().toUpperCase();
+  const options = ['YES', 'Y', 'NO', 'N'];
+  while (!options.includes(response)) {
+    prompt('Invalid response! \n => Choose yes, y, no, n');
+    response = ask().toUpperCase();
+  }
+  if (response === 'YES' || response === 'Y') return startGame();
+  if (response === 'NO' || response === 'N') return prompt('Thank you for playing!');
+};
 
+startGame();
