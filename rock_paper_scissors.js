@@ -21,17 +21,29 @@ const playerChoice = function (array) {
 const computerChoice = function (array) {
   const randomIndex = Math.floor(Math.random() * OPTIONS.length);
   const computerPick = array[randomIndex];
-  console.log(randomIndex);
   return computerPick;
 };
 
-const determineWinner = function (player, computer) {
-  const playerPick = player(OPTIONS)
-  const computerPick = computer(OPTIONS)
-  console.log(`You choose ${playerPick}`);
-  console.log(`Computer choose ${computerPick}`);
-  return;
+const determineWinner = function (playerFunc, computerFunc) {
+  const playerPick = playerFunc(OPTIONS);
+  const computerPick = computerFunc(OPTIONS);
+  prompt(`You choose ${playerPick}, Computer choose ${computerPick}`);
+
+  if (
+    (playerPick === 'Rock' && computerPick === 'Scissors') ||
+    (playerPick === 'Paper' && computerPick === 'Rock') ||
+    (playerPick === 'Scissors' && computerPick === 'Paper')) {
+    return prompt(`${playerPick} beats ${computerPick}! You win!`);
+  } else if (
+    (playerPick === 'Rock' && computerPick === 'Paper') ||
+    (playerPick === 'Paper' && computerPick === 'Scissors') ||
+    (playerPick === 'Scissors' && computerPick === 'Rock')) {
+    return prompt(`${computerPick} beats ${playerPick}! Computer wins!`);
+  } else {
+    return prompt('Its a tie');
+  }
 };
 
 determineWinner(playerChoice, computerChoice);
+
 
