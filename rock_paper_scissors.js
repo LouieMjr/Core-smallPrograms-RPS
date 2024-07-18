@@ -1,4 +1,5 @@
 const readline = require('readline-sync');
+const gameMessages = require('./game_messages.json');
 const ask = readline.question;
 const OPTIONS = ['Rock', 'Paper', 'Scissors', 'Spock', 'Lizard'];
 
@@ -7,12 +8,12 @@ function prompt(message) {
 }
 
 const playerChoice = function (array) {
-  prompt(`Choose one: ${array.join(', ')}`);
+  prompt(`${gameMessages.playerChoose} ${array.join(', ')}`);
   let choice = ask();
   choice = choice[0].toUpperCase() + choice.slice(1);
 
   while (!array.includes(choice)) {
-    prompt(`Thats not a valid choice. Pick between ${array.join(', ')}`);
+    prompt(`${gameMessages.invalidChoice} ${array.join(', ')}`);
     choice = ask();
     choice = choice[0].toUpperCase() + choice.slice(1);
   }
@@ -48,20 +49,20 @@ const determineWinner = function (playerFunc, computerFunc) {
 
 const startGame = function () {
   console.clear();
-  prompt('Welcome to Rock, Paper, Scissor, Spock, Lizard!!');
+  prompt(gameMessages.welcome);
   determineWinner(playerChoice, computerChoice);
 };
 
 const restartGame = function () {
-  prompt('Do you want to play again? Enter: yes, y, or no, n');
+  prompt(gameMessages.restart);
   let response = ask().toUpperCase();
   const options = ['YES', 'Y', 'NO', 'N'];
   while (!options.includes(response)) {
-    prompt('Invalid response! \n => Choose yes, y, no, n');
+    prompt(gameMessages.invalidRestart);
     response = ask().toUpperCase();
   }
   if (response === 'YES' || response === 'Y') return startGame();
-  if (response === 'NO' || response === 'N') return prompt('Thank you for playing!');
+  if (response === 'NO' || response === 'N') return prompt(gameMessages.goodbye);
 };
 
 startGame();
