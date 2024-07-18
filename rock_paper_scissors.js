@@ -1,6 +1,6 @@
 const readline = require('readline-sync');
 const ask = readline.question;
-const OPTIONS = ['Rock', 'Paper', 'Scissors'];
+const OPTIONS = ['Rock', 'Paper', 'Scissors', 'Spock', 'Lizard'];
 
 function prompt(message) {
   console.log(` => ${message}`);
@@ -32,9 +32,11 @@ const determineWinner = function (playerFunc, computerFunc) {
   prompt(`You choose ${playerPick}, Computer choose ${computerPick}`);
 
   if (
-    (playerPick === 'Rock' && computerPick === 'Scissors') ||
-    (playerPick === 'Paper' && computerPick === 'Rock') ||
-    (playerPick === 'Scissors' && computerPick === 'Paper')) {
+    (playerPick === 'Lizard' && (computerPick === 'Spock' || computerPick === 'Paper')) ||
+    (playerPick === 'Spock' && (computerPick === 'Rock' || computerPick === 'Scissors')) ||
+    (playerPick === 'Rock' && (computerPick === 'Scissors' || computerPick === 'Lizard')) ||
+    (playerPick === 'Paper' && (computerPick === 'Rock' || computerPick === 'Spock')) ||
+    (playerPick === 'Scissors' && (computerPick === 'Paper' || computerPick === 'Lizard'))) {
     prompt(`${playerPick} beats ${computerPick}! You win!`);
   } else if (playerPick === computerPick) {
     prompt('Its a tie');
@@ -46,7 +48,7 @@ const determineWinner = function (playerFunc, computerFunc) {
 
 const startGame = function () {
   console.clear();
-  prompt('Welcome to Rock, Paper, Scissor Shoot!!');
+  prompt('Welcome to Rock, Paper, Scissor, Spock, Lizard!!');
   determineWinner(playerChoice, computerChoice);
 };
 
