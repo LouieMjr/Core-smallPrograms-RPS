@@ -29,6 +29,7 @@ const changeAbbreviationToFullWord = function (string) {
 };
 
 const playerChoice = function (gameOptions, shortenedGameOptions) {
+  prompt(`You can enter lower case versions of the options below.`);
   prompt(`${gameMessages.playerChoose} ${gameOptions.join(', ')} or ${shortenedGameOptions.join(', ')}`);
   let choice = ask();
   choice = changeAbbreviationToFullWord(choice);
@@ -90,6 +91,7 @@ const displayScore = function (playerPoints, computerPoints) {
 const startGame = function () {
   console.clear();
   prompt(gameMessages.welcome);
+  prompt(gameMessages.rules);
   displayScore(playerScore, computerScore);
   while (playerScore < 3 && computerScore < 3) {
     const playerPick = playerChoice(GAME_OPTIONS, ABBREVIATED_GAME_OPTIONS);
