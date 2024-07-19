@@ -1,6 +1,6 @@
 {
   "welcome": "Welcome to Rock, Paper, Scissor, Spock, Lizard!!",
-  "playerChoose": "Choose one",
+  "playerChoose": "Choose one:",
   "invalidChoice": "Thats not a valid choice. Pick between",
   "restart": "Do you want to play again? Enter: yes, y, or no, n",
   "invalidRestart": "Invalid response! \n => Choose yes, y, no, n",
