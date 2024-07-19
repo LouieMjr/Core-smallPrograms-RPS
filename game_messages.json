@@ -1,9 +1,9 @@
 {
   "welcome": "Welcome to Rock, Paper, Scissor, Spock, Lizard!!",
-  "rules": "If you've never played before here's how it works. \n => Scissors cuts Paper covers Rock crushes Lizard. \n => Lizard poisons Spock smashes Scissors decapitates Lizard eats Paper. \n => Paper disproves Spock vaporizes Rock crushes Scissors!",
+  "rules": "If you've never played before here's how it works. \n => 1. Scissors cuts Paper covers Rock crushes Lizard. \n => 2. Lizard poisons Spock smashes Scissors decapitates Lizard eats Paper. \n => 3. Paper disproves Spock vaporizes Rock crushes Scissors.",
   "playerChoose": "Choose one:",
   "invalidChoice": "Thats not a valid choice. Pick between",
-  "restart": "Do you want to play again? Enter: yes, y, or no, n",
-  "invalidRestart": "Invalid response! \n => Choose yes, y, no, n",
+  "restart": "Do you want to play again? Enter: Yes, Y, or No, N",
+  "invalidRestart": "Invalid response! \n => Choose Yes, Y, No, N",
   "goodbye": "Thank you for playing!"
 }

@@ -3,12 +3,24 @@ const gameMessages = require('./game_messages.json');
 const ask = readline.question;
 const GAME_OPTIONS = ['Rock', 'Paper', 'Scissors', 'Spock', 'Lizard'];
 const ABBREVIATED_GAME_OPTIONS = ['R', 'P', 'Sc', 'Sp', 'L'];
+const WINNING_COMBOS = {
+  Rock: ['Scissors', 'Lizard'],
+  Paper: ['Rock', 'Spock'],
+  Scissors: ['Paper', 'Lizard'],
+  Lizard: ['Spock', 'Paper'],
+  Spock: ['Scissors', 'Rock'],
+};
+
 let playerScore = 0;
 let computerScore = 0;
 
 function prompt(message) {
   console.log(` => ${message}`);
 }
+
+const playerWin = function (choice, computerChoice) {
+  return WINNING_COMBOS[choice].includes(computerChoice);
+};
 
 const changeAbbreviationToFullWord = function (string) {
   string = string[0].toUpperCase() + string.slice(1);
@@ -48,29 +60,21 @@ const computerChoice = function (array) {
   return computerPick;
 };
 
-const incrementPlayerScore = function (score) {
-  return ++score;
-};
-const incrementComputerScore = function (score) {
+const incrementScore = function (score) {
   return ++score;
 };
 
 const determineWinner = function (playerChoice, computerChoice) {
   console.clear();
   prompt(`You choose ${playerChoice}, Computer choose ${computerChoice}`);
-  if (
-    (playerChoice === 'Lizard' && (computerChoice === 'Spock' || computerChoice === 'Paper')) ||
-    (playerChoice === 'Spock' && (computerChoice === 'Rock' || computerChoice === 'Scissors')) ||
-    (playerChoice === 'Rock' && (computerChoice === 'Scissors' || computerChoice === 'Lizard')) ||
-    (playerChoice === 'Paper' && (computerChoice === 'Rock' || computerChoice === 'Spock')) ||
-    (playerChoice === 'Scissors' && (computerChoice === 'Paper' || computerChoice === 'Lizard'))) {
+  if (playerWin(playerChoice, computerChoice)) {
     prompt(`${playerChoice} beats ${computerChoice}! You win the round!`);
     return 'player';
-  } else if (playerChoice === computerChoice) {
-    prompt('Its a tie');
-  } else {
+  } else if (playerWin(computerChoice, playerChoice)) {
     prompt(`${computerChoice} beats ${playerChoice}! Computer wins this round!`);
     return 'computer';
+  } else {
+    prompt('Its a tie');
   }
 };
 
@@ -97,8 +101,8 @@ const startGame = function () {
     const playerPick = playerChoice(GAME_OPTIONS, ABBREVIATED_GAME_OPTIONS);
     const computerPick = computerChoice(GAME_OPTIONS);
     const winner = determineWinner(playerPick, computerPick);
-    if (winner === 'player') playerScore = incrementPlayerScore(playerScore);
-    if (winner === 'computer') computerScore = incrementComputerScore(computerScore);
+    if (winner === 'player') playerScore = incrementScore(playerScore);
+    if (winner === 'computer') computerScore = incrementScore(computerScore);
     displayScore(playerScore, computerScore);
   }
 };
